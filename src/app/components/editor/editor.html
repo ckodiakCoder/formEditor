@@ -6,61 +6,36 @@
     <!-- Pages list -->
     <ul class="page-list">
       @for (page of pages; track $index; let i = $index) {
-        <li
-          class="page-item"
-          [class.page-item-active]="selectedPageIndex === i"
-          (click)="selectPage(i)"
-        >
-          <div class="page-item-main">
-            <span class="page-name">{{ page.name }}</span>
+      <li class="page-item" [class.page-item-active]="selectedPageIndex === i" (click)="selectPage(i)">
+        <div class="page-item-main">
+          <span class="page-name">{{ page.name }}</span>
 
-            <button
-              type="button"
-              class="icon-btn remove-btn"
-              aria-label="Remove page"
-              (click)="$event.stopPropagation(); removePage(i)"
-            >
-              <span [ngClass]="ICON_TRASH"></span>
-            </button>
-          </div>
-        </li>
+          <button type="button" class="icon-btn remove-btn" aria-label="Remove page"
+            (click)="$event.stopPropagation(); removePage(i)">
+            <span [ngClass]="ICON_TRASH"></span>
+          </button>
+        </div>
+      </li>
       }
     </ul>
 
     <!-- Add new page block like '+ Add new' -->
     <div class="screens-add-block">
       @if (!isAddingPage) {
-        <button
-          type="button"
-          class="screens-add-button"
-          (click)="isAddingPage = true"
-        >
-          <span class="screens-add-plus">+</span>
-          <span>Add new</span>
-        </button>
+      <button type="button" class="screens-add-button" (click)="isAddingPage = true">
+        <span class="screens-add-plus">+</span>
+        <span>Add new</span>
+      </button>
       } @else {
-        <div class="screens-add-form">
-          <input
-            pInputText
-            class="add-page-input"
-            placeholder="Screen name"
-            [(ngModel)]="newPageName"
-          />
-          <button
-            type="button"
-            class="screens-add-primary"
-            (click)="addPage(newPageName)"
-          >
-            Add
-          </button>
-          <button
-            type="button"
-            class="screens-add-cancel"
-            (click)="isAddingPage = false; newPageName = ''"
-          >
-            Cancel
-          </button>
-        </div>
+      <div class="screens-add-form">
+        <input pInputText class="add-page-input" placeholder="Screen name" [(ngModel)]="newPageName" />
+        <button type="button" class="screens-add-primary" (click)="addPage(newPageName)">
+          Add
+        </button>
+        <button type="button" class="screens-add-cancel" (click)="isAddingPage = false; newPageName = ''">
+          Cancel
+        </button>
+      </div>
       }
     </div>
 
@@ -69,119 +44,77 @@
       <h4 class="edit-section-title">Edit content</h4>
 
       <label for="btnName" class="field-label">Edit the button name</label>
-      <input
-        id="btnName"
-        pInputText
-        type="text"
-        class="btn-name-input"
-        [value]="buttonName"
-        (input)="onButtonNameChange($event.target.value)"
-      />
+      <input id="btnName" pInputText type="text" class="btn-name-input" [value]="buttonName"
+        (input)="onButtonNameChange($event.target.value)" />
 
       <!-- Add component row -->
       <div class="add-component-row">
         <span class="field-label-inline">Add a component:</span>
-        <p-select
-          [options]="componentTypes"
-          [(ngModel)]="selectedComponentType"
-          optionLabel="label"
-          optionValue="value"
-          class="component-select"
-        ></p-select>
-        <button
-          type="button"
-          class="icon-btn add-btn"
-          (click)="addContentField()"
-          aria-label="Add new content component"
-        >
+
+        <p-select [options]="componentTypes" [(ngModel)]="selectedComponentType" optionLabel="label" optionValue="value"
+          class="component-select" appendTo="body"></p-select>
+
+        <button type="button" class="icon-btn add-btn" (click)="addContentField()"
+          aria-label="Add new content component">
           <span [ngClass]="ICON_PLUS"></span>
         </button>
       </div>
 
+
       <!-- Content fields -->
       <div class="content-fields-wrapper">
         @for (field of contentFields; track $index; let i = $index) {
-          <div class="content-field-row">
-            <!-- Row 1: type label, main label, required toggle, remove -->
-            <div class="content-field-main">
-              <span class="content-field-type">
-                {{ getComponentLabel(field.type) }}:
-              </span>
+        <div class="content-field-row">
+          <!-- Row 1: type label, main label, required toggle, remove -->
+          <div class="content-field-main">
+            <span class="content-field-type">
+              {{ getComponentLabel(field.type) }}:
+            </span>
 
-              <input
-                pInputText
-                class="content-field-input"
-                [value]="field.label"
-                (input)="updateFieldLabel(i, $event.target.value)"
-                placeholder="Label / Placeholder"
-              />
+            <input pInputText class="content-field-input" [value]="field.label"
+              (input)="updateFieldLabel(i, $event.target.value)" placeholder="Label / Placeholder" />
 
-              <span class="required-label">Required</span>
-              <p-toggleswitch
-                [(ngModel)]="field.required"
-                (onChange)="updateFieldRequired(i, field.required)"
-              ></p-toggleswitch>
+            <span class="required-label">Required</span>
+            <p-toggleswitch [(ngModel)]="field.required"
+              (onChange)="updateFieldRequired(i, field.required)"></p-toggleswitch>
 
-              <button
-                type="button"
-                class="icon-btn remove-btn"
-                (click)="removeContentField(i)"
-                aria-label="Remove field"
-              >
-                <span [ngClass]="ICON_TRASH"></span>
-              </button>
+            <button type="button" class="icon-btn remove-btn" (click)="removeContentField(i)" aria-label="Remove field">
+              <span [ngClass]="ICON_TRASH"></span>
+            </button>
+          </div>
+
+          <!-- Row 2: dropdown-specific controls -->
+          @if (field.type === 'dropdown') {
+          <div class="dropdown-extra">
+            <div class="dropdown-default-row">
+              <span>Default option:</span>
+              <input pInputText class="dropdown-input" [value]="field.defaultOption || ''"
+                (input)="updateFieldDefaultOption(i, $event.target.value)" placeholder="Default value" />
             </div>
 
-            <!-- Row 2: dropdown-specific controls -->
-            @if (field.type === 'dropdown') {
-              <div class="dropdown-extra">
-                <div class="dropdown-default-row">
-                  <span>Default option:</span>
-                  <input
-                    pInputText
-                    class="dropdown-input"
-                    [value]="field.defaultOption || ''"
-                    (input)="updateFieldDefaultOption(i, $event.target.value)"
-                    placeholder="Default value"
-                  />
+            <div class="dropdown-options-row">
+              <span class="dropdown-options-label">Options:</span>
+              <div class="dropdown-options-list">
+                @for (opt of field.options || []; track $index; let oi = $index) {
+                <div class="dropdown-option-item">
+                  <input pInputText class="dropdown-input" [value]="opt"
+                    (input)="updateDropdownOption(i, oi, $event.target.value)" placeholder="Option" />
+                  <button type="button" class="icon-btn remove-btn small-icon-btn" (click)="removeDropdownOption(i, oi)"
+                    aria-label="Remove option">
+                    <span [ngClass]="ICON_TRASH"></span>
+                  </button>
                 </div>
+                }
 
-                <div class="dropdown-options-row">
-                  <span class="dropdown-options-label">Options:</span>
-                  <div class="dropdown-options-list">
-                    @for (opt of field.options || []; track $index; let oi = $index) {
-                      <div class="dropdown-option-item">
-                        <input
-                          pInputText
-                          class="dropdown-input"
-                          [value]="opt"
-                          (input)="updateDropdownOption(i, oi, $event.target.value)"
-                          placeholder="Option"
-                        />
-                        <button
-                          type="button"
-                          class="icon-btn remove-btn small-icon-btn"
-                          (click)="removeDropdownOption(i, oi)"
-                          aria-label="Remove option"
-                        >
-                          <span [ngClass]="ICON_TRASH"></span>
-                        </button>
-                      </div>
-                    }
-
-                    <!-- Professional "Add option" button under the list -->
-                    <button
-                      type="button"
-                      class="dropdown-add-btn"
-                      (click)="addDropdownOption(i)"
-                    >
-                      + Add option
-                    </button>
-                  </div>
-                </div>
+                <!-- Professional "Add option" button under the list -->
+                <button type="button" class="dropdown-add-btn" (click)="addDropdownOption(i)">
+                  + Add option
+                </button>
               </div>
-            }
+            </div>
           </div>
+          }
+        </div>
         }
       </div>
     </div>
