@@ -11,7 +11,8 @@
   flex-direction: column;
   color: #111;
   overflow: hidden; /* rounded corners apply to inner content */
-  /* professional, native UI font stack */
+
+  /* unified, system font stack for everything inside (inputs, labels, checkbox text) */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
 }
@@ -100,6 +101,11 @@
   background: transparent;
   font-size: 0.9rem;
   font-family: inherit; /* matches inputs and labels */
+}
+
+/* make PrimeNG checkbox box use same font sizing context */
+.preview-checkbox-row .p-checkbox {
+  font-family: inherit;
 }
 
 /* footer bar similar to WhatsApp "Managed" section */
