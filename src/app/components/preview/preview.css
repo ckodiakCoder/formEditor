@@ -1,0 +1,143 @@
+.preview-canvas {
+  box-sizing: border-box;
+  width: 480px;
+  height: 720px;
+  margin: 0 auto;
+  background: #fefefe;
+  border-radius: 18px;
+  border: 1px solid #d6d6d6;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  color: #111;
+  overflow: hidden; /* rounded corners apply to inner content */
+  /* professional, native UI font stack */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* header bar */
+.preview-navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f5f5f5;
+  color: #111;
+  font-family: inherit;
+}
+
+.preview-title {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+/* scrollable middle content */
+.preview-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 18px 16px 18px 16px;
+  background: #fafafa;
+  color: #111;
+  overflow-y: auto;
+  font-family: inherit;
+}
+
+/* each field block */
+.preview-field {
+  width: 94%;
+  max-width: 400px;
+  margin-bottom: 18px; /* more spacing between components */
+}
+
+/* float label wrappers take full width */
+.preview-floatlabel {
+  width: 100%;
+}
+
+/* unified input look (like WhatsApp web inputs) */
+.preview-input {
+  width: 100%;
+  max-width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #d0d0d0;
+  background: #ffffff;
+  color: #111;
+  font-size: 0.9rem;
+  box-shadow: none;
+  font-family: inherit; /* same font as rest of canvas */
+}
+
+.preview-input:focus {
+  outline: none;
+  border-color: #128c7e;
+  box-shadow: 0 0 0 1px rgba(18, 140, 126, 0.25);
+}
+
+/* dropdown and datepicker should inherit same rounded look and font */
+.p-select,
+.p-datepicker {
+  width: 100%;
+  font-family: inherit;
+}
+
+/* checkbox row: simple, inline with same font */
+.preview-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  font-size: 0.9rem;
+  font-family: inherit; /* matches inputs and labels */
+}
+
+/* footer bar similar to WhatsApp "Managed" section */
+.preview-footer {
+  width: 100%;
+  border-top: 1px solid #e0e0e0;
+  padding: 10px 16px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  font-family: inherit;
+}
+
+.default-preview-btn {
+  width: 160px;
+  border-radius: 16px;
+  background: #00a884;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-family: inherit;
+}
+
+.preview-footer-text {
+  font-size: 0.75rem;
+  color: #666;
+  text-align: center;
+  font-family: inherit;
+}
+
+.preview-footer-text a {
+  color: #0a66c2;
+  text-decoration: none;
+}
+
+.preview-footer-text a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,84 @@
+<div class="preview-canvas">
+  <!-- Fixed header -->
+  <div class="preview-navbar">
+    <span class="preview-title">{{ pageName }}</span>
+  </div>
+
+  <!-- Scrollable content area -->
+  <div class="preview-content">
+    @for (field of contentFields; track $index; let i = $index) {
+    <div class="preview-field">
+      <!-- TEXT INPUT -->
+      @if (field.type === 'input') {
+      <p-floatlabel variant="on" class="preview-floatlabel">
+        <input pInputText class="preview-input" [required]="field.required" />
+        <label>
+          {{ field.required ? (field.label || '') : ((field.label || '') + ' (optional)') }}
+        </label>
+      </p-floatlabel>
+      }
+
+      <!-- TEXTAREA -->
+      @if (field.type === 'textarea') {
+      <p-floatlabel variant="on" class="preview-floatlabel">
+        <textarea pInputText class="preview-input" rows="3" [required]="field.required"></textarea>
+        <label>
+          {{ field.required ? (field.label || '') : ((field.label || '') + ' (optional)') }}
+        </label>
+      </p-floatlabel>
+      }
+
+      <!-- DATEPICKER: small, normal popup, on-label on input -->
+      @if (field.type === 'datepicker') {
+      <p-floatlabel variant="on" class="preview-floatlabel">
+        <p-datepicker [(ngModel)]="field._previewDate" [inputId]="'dp_' + i" size="small" showIcon="true"
+          iconDisplay="input" class="preview-input" [required]="field.required"></p-datepicker>
+        <label [for]="'dp_' + i">
+          {{ field.required ? (field.label || '') : ((field.label || '') + ' (optional)') }}
+        </label>
+      </p-floatlabel>
+      }
+
+      <!-- DROPDOWN -->
+      @if (field.type === 'dropdown') {
+      <p-floatlabel variant="on" class="preview-floatlabel">
+        <p-select class="preview-input" [options]="getDropdownOptions(field)" [placeholder]="''"></p-select>
+        <label>
+          {{ field.required
+          ? (field.label || field.defaultOption || 'Select...')
+          : ((field.label || field.defaultOption || 'Select...') + ' (optional)') }}
+        </label>
+      </p-floatlabel>
+      }
+
+      <!-- CHECKBOX: no float label, simple row -->
+      @if (field.type === 'checkbox') {
+      <div class="preview-field">
+        <div class="preview-checkbox-row">
+          <p-checkbox binary="true" [required]="field.required"></p-checkbox>
+          <span>
+            {{ field.label }}
+            @if (!field.required) { (optional) }
+          </span>
+        </div>
+      </div>
+      }
+    </div>
+    }
+
+
+  </div>
+
+  <!-- footer -->
+  <div class="preview-footer">
+    <button pButton [label]="buttonName" class="p-button-raised default-preview-btn" type="button"></button>
+
+    <div class="preview-footer-text">
+      Managed by the business.
+      <a href="https://developers.facebook.com/docs/whatsapp/flows/playground" target="_blank"
+        rel="noopener noreferrer">
+        Learn more
+      </a>
+    </div>
+  </div>
+</div>

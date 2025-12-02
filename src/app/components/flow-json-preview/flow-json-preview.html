@@ -1,0 +1,14 @@
+<div class="flow-json-container">
+  <div class="flow-json-header">
+    <span class="flow-json-title">Flow JSON</span>
+    <button
+      pButton
+      type="button"
+      label="Copy JSON"
+      class="p-button-sm"
+      (click)="copyJson()"
+    ></button>
+  </div>
+
+  <pre class="flow-json-body">{{ flowJson }}</pre>
+</div>
