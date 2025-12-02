@@ -7,12 +7,12 @@
   background: #f7f7f7;
 }
 
-/* scrollable inner area so dropdown overlay is not clipped by outer container */
+/* scrollable inner area */
 .sidebar-scroll {
   width: 100%;
   max-height: calc(100vh - 120px);
   overflow-y: auto;
-  padding-right: 4px; /* small room for scrollbar */
+  padding-right: 4px;
 }
 
 /* Screens title */
@@ -38,7 +38,7 @@
 
 /* LEFT‑ALIGNED screen rows, slightly wider */
 .page-item-main {
-  width: 420px;                     /* wider but fixed column */
+  width: 420px;
   max-width: 100%;
   display: flex;
   align-items: center;
@@ -182,7 +182,7 @@
 }
 
 .content-field-row {
-  width: 420px;                    /* matches Screens width */
+  width: 420px;
   max-width: 100%;
   margin-bottom: 10px;
   padding: 8px 10px;
